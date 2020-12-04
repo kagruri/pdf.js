@@ -2353,36 +2353,7 @@ let validateFileURL;
 {
   const HOSTED_VIEWER_ORIGINS = ["null", "http://mozilla.github.io", "https://mozilla.github.io"];
 
-  validateFileURL = function (file) {
-    if (file === undefined) {
-      return;
-    }
-
-    try {
-      const viewerOrigin = new URL(window.location.href).origin || "null";
-
-      if (HOSTED_VIEWER_ORIGINS.includes(viewerOrigin)) {
-        return;
-      }
-
-      const {
-        origin,
-        protocol
-      } = new URL(file, window.location.href);
-
-      if (origin !== viewerOrigin && protocol !== "blob:") {
-        throw new Error("file origin does not match viewer's");
-      }
-    } catch (ex) {
-      const message = ex && ex.message;
-      PDFViewerApplication.l10n.get("loading_error", null, "An error occurred while loading the PDF.").then(loadingErrorMessage => {
-        PDFViewerApplication.error(loadingErrorMessage, {
-          message
-        });
-      });
-      throw ex;
-    }
-  };
+  validateFileURL=(file)=>null;
 }
 
 async function loadFakeWorker() {
